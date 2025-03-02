@@ -1,0 +1,98 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #e00e00;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header h1 {
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    flex: 1;
+}
+
+header .icons {
+    display: flex;
+}
+
+header .icons a {
+    margin-left: 15px;
+}
+
+main {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+main h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+main p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #666;
+}
+
+.essence-section {
+    margin-bottom: 50px;
+}
+
+.essence-section img {
+    margin-bottom: 20px;
+}
+
+.products {
+    display: flex;
+    justify-content: space-between; /* Cambiado de center a space-between */
+    flex-wrap: wrap;
+    padding: 0 10px; /* Añadido para reducir el espacio en los bordes */
+}
+
+.product {
+    flex: 1 1 calc(25% - 20px); /* Permite que cada producto ocupe 1/4 del espacio con márgenes */
+    margin: 10px; /* Pequeño margen alrededor de cada producto */
+    text-align: center;
+    box-sizing: border-box; /* Asegura que el padding/margin no afecte el tamaño total */
+}
+
+.product img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.product p {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}

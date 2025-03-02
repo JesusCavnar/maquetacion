@@ -1,0 +1,94 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #D50000; /* Color rojo del encabezado */
+    padding: 15px 30px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.store-name {
+    font-size: 24px;
+    color: white;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-menu li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.user-icon img {
+    width: 30px;
+    height: 30px;
+}
+
+/* Main Hero Image */
+.hero-section {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+}
+
+/* Featured Products */
+.featured-products {
+    padding: 30px;
+    text-align: center;
+}
+
+.featured-products h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.product-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-item img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.product-item p {
+    font-size: 16px;
+}
