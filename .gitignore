@@ -1,0 +1,49 @@
+# ============================================
+# GITIGNORE - PROYECTO MUNDO VELAS
+# ============================================
+
+# === Dependencias de Node.js ===
+node_modules/
+
+# === Variables de entorno y secretos (¡CRÍTICO!) ===
+.env
+.env.local
+.env.production
+.env.development
+
+# === Claves de Firebase (¡CRÍTICO!) ===
+Firebasekey.json
+serviceAccountKey.json
+firebase-service-account.json
+
+# === Archivos de VS Code ===
+.vscode/
+!.vscode/launch.json
+!.vscode/settings.json
+
+# === Logs ===
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# === Sistema operativo ===
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === Archivos temporales ===
+*.tmp
+*.bak
+*.swp
+*~
+
+# === Build ===
+dist/
+build/
+
+# === Config de linters ===
+.hintrc
+
+# === Carpeta de pruebas (si no la usas) ===
+TEST/
