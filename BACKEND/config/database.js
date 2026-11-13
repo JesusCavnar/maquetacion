@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const admin = require('firebase-admin');
-const serviceAccount = require('../serviceAccountKey.json'); // Path to your Firebase service account key
+const serviceAccount = require('../serviceAccountKey.json'); // Path to Firebase service account key
 
 // Initialize Firebase Admin
 if (!admin.apps.length) {

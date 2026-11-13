@@ -24,7 +24,8 @@ const allowedOrigins = [
   'http://localhost:5500',
   'http://127.0.0.1:5500',
   'http://localhost:3000',
-  'http://127.0.0.1:3000'
+  'http://127.0.0.1:3000',
+  'https://mundo-velas.netlify.app'
 ];
 
 const corsOptions = {
@@ -51,9 +52,19 @@ connectDB();
 // Routes - IMPORTANT: Load these AFTER CORS and other middleware
 const userRoutes = require('./src/routes/userRoutes');
 const favoritesRoutes = require('./src/routes/favoriteRoutes'); // Fixed path
+const cartRoutes = require('./src/routes/cartRoutes');
 
 app.use('/api/users', userRoutes);  
 app.use('/api/favorites', favoritesRoutes);
+app.use('/api/cart', cartRoutes);
+
+// Checkout routes
+const checkoutRoutes = require('./src/routes/checkoutRoutes');
+app.use('/api/checkout', checkoutRoutes);
+
+// Order routes
+const orderRoutes = require('./src/routes/orderRoutes');
+app.use('/api/orders', orderRoutes);
 
 // Test route
 app.get('/', (req, res) => {

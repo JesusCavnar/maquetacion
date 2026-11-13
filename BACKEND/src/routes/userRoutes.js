@@ -9,6 +9,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 
+
 // Helper function for error handling
 const handleError = (res, error, context) => {
     console.error(`Error in ${context}:`, error);
@@ -331,33 +332,34 @@ router.delete('/favorites/:productId', authenticateToken, async (req, res) => {
     }
 });
 
+
 // Add this helper function for product prices
 function getProductPriceFromId(productId) {
     const productPrices = {
-        'colonia-product-id': 120.00,
-        'ficodiamalfi-product-id': 85.00,
-        'mirtodipanamera-product-id': 85.00,
-        'grazie-product-id': 95.00,
-        'lavender-product-id': 72.00,
-        'limebasil-product-id': 95.00,
-        'peony-product-id': 68.00,
-        'goldenamber-product-id': 115.00,
-        'essence-boungiorno-id': 95.00,
-        'essence-lacasasullago-id': 94.00,
-        'essence-boungiorno-refill-id': 118.00,
-        'essence-yuzu-id': 105.00,
-        'essence-limebasil-id': 112.00,
-        'essence-lavender-moonflower-id': 112.00,
-        'essence-woodsage-id': 112.00,
-        'essence-freshfig-refill-id': 95.00,
-        'gift-british-seaside-id': 420.00,
-        'gift-lavender-moonflower-trio-id': 200.00,
-        'gift-travel-candles-trio-id': 100.00,
-        'gift-wildberry-bramble-duo-id': 295.00,
-        'gift-festive-collection-trio-id': 140.00,
-        'gift-terrace-trio-id': 145.00,
-        'gift-ecodiluce-id': 310.00,
-        'gift-chapeau-candle-id': 695.00
+        'colonia-product-id': 920000,
+        'ficodiamalfi-product-id': 485000,
+        'mirtodipanamera-product-id': 485000,
+        'grazie-product-id': 495000,
+        'lavender-product-id': 472000,
+        'limebasil-product-id': 695000,
+        'peony-product-id': 468000,
+        'goldenamber-product-id': 515000,
+        'essence-boungiorno-id': 495000,
+        'essence-lacasasullago-id': 595000,
+        'essence-boungiorno-refill-id': 318000,
+        'essence-yuzu-id': 505000,
+        'essence-limebasil-id': 412000,
+        'essence-lavender-moonflower-id': 412000,
+        'essence-woodsage-id': 412000,
+        'essence-freshfig-refill-id': 395000,
+        'gift-british-seaside-id': 2420000,
+        'gift-lavender-moonflower-trio-id': 1200000,
+        'gift-travel-candles-trio-id': 1100000,
+        'gift-wildberry-bramble-duo-id': 1295000,
+        'gift-festive-collection-trio-id': 1140000,
+        'gift-terrace-trio-id': 1145000,
+        'gift-ecodiluce-id': 1310000,
+        'gift-chapeau-candle-id': 2695000,
     };
     return productPrices[productId] || 0;
 }
