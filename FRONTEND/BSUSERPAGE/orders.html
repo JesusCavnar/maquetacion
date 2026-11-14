@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Compras - Mundo Velas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .bg-red { background-color: #ff0000; }
+        .navbar-brand-custom { margin-left: 43%; }
+        .brand-text-black { color: black; }
+        .order-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .order-header {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .order-body {
+            padding: 20px;
+        }
+        .order-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+            /* Footer styles */
+        footer {
+            background-color: #222;
+            color: #fff;
+            padding: 3rem 0 1.5rem;
+            margin-top: auto;
+        }
+        
+        .footer-title {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: #fff;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+            transition: all 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-red);
+            padding-left: 5px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icons a {
+            color: white;
+            background-color: rgba(255,255,255,0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary-red);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <!-- Navbar superior -->
+    <nav class="navbar bg-red">
+        <div class="container-fluid">
+            <a class="navbar-brand navbar-brand-custom d-flex align-items-center" href="../BSHOME/index.html">
+                <img src="ruta-del-logo.png" alt="Logo" width="34" height="40" class="d-inline-block align-text-top me-2">
+                <span class="text-center brand-text-black">Mundo Velas</span>
+            </a>
+            <div class="d-flex align-items-center gap-3">
+               <a href="../BSCART/index.html" class="position-relative" style="text-decoration: none;">
+                    <img src="ruta-de-tu-imagen-carrito.png" alt="Carrito" style="width: 32px; height: 32px; object-fit: contain;">
+                    <span id="cart-counter" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none;">0</span>
+               </a>
+                <a class="navbar-brand profile-link" href="../BSUSERPAGE/profilemain.html">
+                    <img src="ruta-del-icono-perfil.png" alt="Profile" width="30" height="30">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Navbar inferior (Perfil) -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary mb-4">
+        <div class="container-fluid justify-content-center">
+            <div class="navbar-nav">
+                <a class="nav-link" href="../BSHOME/index.html">Inicio</a>
+                <a class="nav-link" href="profilemain.html">Mi Perfil</a>
+                <a class="nav-link" href="../BSFAVORITES/index.html">Mis Favoritos</a>
+                <a class="nav-link active" href="orders.html">Mis Compras</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido -->
+    <div class="container pb-5">
+        <h2 class="mb-4">Historial de Compras</h2>
+        
+        <div id="orders-container">
+            <!-- Spinner de carga -->
+            <div class="text-center py-5" id="loading">
+                <div class="spinner-border text-danger" role="status"></div>
+                <p class="mt-2">Cargando tus compras...</p>
+            </div>
+        </div>
+    </div>
+        <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h4 class="footer-title">Mundo Velas</h4>
+                    <p>Creamos momentos de calidez y tranquilidad a través de nuestras velas artesanales desde 2010.</p>
+                    <div class="social-icons">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="Pinterest"><i class="fab fa-pinterest"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="footer-title">Enlaces Rápidos</h5>
+                    <div class="footer-links">
+                        <a href="../BSHOME/index.html">Inicio</a>
+                        <a href="../BSCATALOG/index.html">Catálogo</a>
+                        <a href="../BSABOUT/index.html">Sobre Nosotros</a>
+                        <a href="../BSMISSION/index.html">Nuestra Misión</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="footer-title">Información de Contacto</h5>
+                    <p><i class="fas fa-map-marker-alt me-2"></i> Calle Velas 123, Bucaramanga, Colombia</p>
+                    <p><i class="fas fa-phone me-2"></i> +57 310 123 4567</p>
+                    <p><i class="fas fa-envelope me-2"></i> info@mundovelas.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Mundo Velas. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/cart-global.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('token');
+            
+            if (!token) {
+                window.location.href = '../BSLOGIN/index.html';
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3000/api/orders', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                const data = await response.json();
+                const container = document.getElementById('orders-container');
+                
+                if (!data.success || data.orders.length === 0) {
+                    container.innerHTML = `
+                        <div class="text-center py-5 bg-white rounded shadow-sm">
+                            <i class="fas fa-box-open text-muted mb-3" style="font-size: 3rem;"></i>
+                            <h4>Aún no tienes compras</h4>
+                            <p class="text-muted">Cuando realices tu primera compra, aparecerá aquí.</p>
+                            <a href="../BSCATALOG/index.html" class="btn btn-outline-danger mt-3">Ir a la Tienda</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                let html = '';
+                data.orders.forEach(order => {
+                    const date = new Date(order.createdAt).toLocaleDateString('es-CO', {
+                        year: 'numeric', month: 'long', day: 'numeric'
+                    });
+
+                    // Generar el HTML de los productos
+                    let itemsHtml = '';
+                    order.items.forEach(item => {
+                        itemsHtml += `
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="../BSCATALOG/${item.image}" class="order-img me-3" alt="${item.name}">
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-0">${item.name}</h6>
+                                    <small class="text-muted">Cantidad: ${item.quantity}</small>
+                                </div>
+                                <div class="text-end">
+                                    <span class="fw-bold">$ ${(item.price * item.quantity).toLocaleString('es-CO')}</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    html += `
+                        <div class="order-card">
+                            <div class="order-header d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="mb-0">Orden #${order.orderNumber}</h6>
+                                    <small class="text-muted">${date}</small>
+                                </div>
+                                <span class="badge ${order.status === 'confirmed' ? 'bg-success' : 'bg-warning'}">
+                                    ${order.status === 'confirmed' ? 'APROBADO' : 'PENDIENTE'}
+                                </span>
+                            </div>
+                            <div class="order-body">
+                                ${itemsHtml}
+                                <hr>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="text-muted">Enviado a: ${order.shippingAddress.city}</span>
+                                    <h5 class="mb-0 text-danger">Total: $ ${order.total.toLocaleString('es-CO')}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                container.innerHTML = html;
+
+            } catch (error) {
+                console.error('Error al cargar compras:', error);
+                document.getElementById('orders-container').innerHTML = `
+                    <div class="alert alert-danger">Error al cargar el historial.</div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>

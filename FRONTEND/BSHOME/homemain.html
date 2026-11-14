@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundo Velas | Velas aromáticas de lujo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #ff0000;
+            --secondary-color: #f9f5f0;
+            --accent-color: #5d4037;
+            --text-color: #333333;
+            --light-text: #777777;
+            --gold: #d4af37;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            background-color: #fff;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .bg-red {
+            background-color: var(--primary-color) !important;
+        }
+        
+        .navbar-nav .nav-link {
+            margin-right: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+        
+          .navbar-brand-custom {
+           font-family: inherit;
+           font-weight: 400;
+            font-size: 1.3rem;
+          color: #030303 !important;
+           margin: 0 auto; 
+         }
+
+         .top-navbar .container-fluid {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          position: relative;
+         }
+
+        
+        .hero-section {
+            position: relative;
+            height: 90vh;
+            background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.3)), 
+                        url('https://images.unsplash.com/photo-1586201375765-4e6847a123b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-color);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+        
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: var(--light-text);
+        }
+        
+        .btn-hero {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+        
+        .btn-hero:hover {
+            background-color: #b71c1c;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 5rem 0 3rem;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 15px auto;
+        }
+        
+        .product-carousel {
+            padding: 2rem 0;
+        }
+        
+        .carousel-item {
+            padding: 0 15px;
+        }
+        
+        .product-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-card img {
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .product-card .card-body {
+            padding: 1.5rem;
+        }
+        
+        .product-card .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+        
+        .product-card .card-text {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+        
+        .testimonials-section {
+            background-color: var(--secondary-color);
+            padding: 5rem 0;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin: 1rem;
+            height: 100%;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .testimonial-text:before {
+            content: "“";
+            font-size: 4rem;
+            color: var(--primary-color);
+            opacity: 0.2;
+            position: absolute;
+            top: -20px;
+            left: -10px;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+        
+        .testimonial-role {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+        
+        .cta-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1545976603-9234d8e27487?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn-cta {
+            background-color: var(--gold);
+            color: var(--text-color);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 30px;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .btn-cta:hover {
+            background-color: #c19b2c;
+            transform: translateY(-3px);
+        }
+        
+        footer {
+            background-color: #222;
+            color: #fff;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-title {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+            transition: all 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icons a {
+            color: white;
+            background-color: rgba(255,255,255,0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .navbar-nav .nav-link {
+                margin-right: 0;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar bg-red">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+          <a class="navbar-brand navbar-brand-custom d-flex align-items-center" href="#">
+            <img src="ruta-del-logo.png" alt="Logo" width="34" height="40" class="d-inline-block align-text-top me-2">
+            <span class="text-center">Mundo Velas</span>
+          </a>
+    </nav>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                         <a class="nav-link" href="../BSHOME/homemain.html">Inicio</a>
+                    </li>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../BSLOGIN/index2.html">Iniciar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Descubre Aromas que Transforman tus Espacios</h1>
+            <p>Experimenta el arte del aroma con nuestras velas artesanales, diseñadas para crear momentos de tranquilidad y elegancia en tu hogar.</p>
+            <a href="#catalog" class="btn btn-hero">Explorar el Catálogo</a>
+        </div>
+    </section>
+
+    <!-- Featured Catalog -->
+    <section class="product-carousel" id="catalog">
+        <div class="container">
+            <h2 class="section-title">Nuestra Colección de Alta Gama</h2>
+            
+            <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <!-- Product 1 -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card product-card">
+                                    <img src="limebasilcandle1.jpg" class="card-img-top" alt="Lime Basil & Mandarin Candle">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Lime Basil & Mandarin</h5>
+                                        <p class="card-text">Una refrescante mezcla de cítricos vibrantes y hierbas aromáticas que revitaliza cualquier espacio.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product 2 -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card product-card">
+                                    <img src="pomegranate.jpg" class="card-img-top" alt="Pomegranate Noir Candle">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Pomegranate Noir</h5>
+                                        <p class="card-text">Una intrigante fusión de granada jugosa con toques ahumados para crear un ambiente sofisticado.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product 3 -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card product-card">
+                                    <img src="boungiornoessence.jpg" class="card-img-top" alt="Buongiorno Essence">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Buongiorno Esencia</h5>
+                                        <p class="card-text">Captura la energía vibrante de una mañana mediterránea con este refrescante difusor de varillas.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <!-- Product 4 -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card product-card">
+                                    <img src="Britishsea.jpg" class="card-img-top" alt="British Seaside Gift Set">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Colección de la costa británica</h5>
+                                        <p class="card-text">Un conjunto de regalo exclusivo que presenta nuestras fragancias de verano más queridas en una lata decorativa.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product 5 -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card product-card">
+                                    <img src="woodsage.jpg" class="card-img-top" alt="Wood Sage & Sea Salt Candle">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Wood Sage & Sea Salt</h5>
+                                        <p class="card-text">Escápate a la costa británica con esta fragancia terrosa con infusión de minerales.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Product 6 -->
+                            <div class="col-md-4 mb-4">
+                                <div class="card product-card">
+                                    <img src="lavendergift.jpg" class="card-img-top" alt="Lavender & Moonflower Trio">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Lavender & Moonflower</h5>
+                                        <p class="card-text">Crea un santuario de dormitorio tranquilo con esta colección serena que mejora el sueño.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">La calidad de las velas Mundo Velas es excepcional. Cada aroma me transporta a un lugar y un estado de ánimo diferentes. Mi hogar nunca se había sentido tan acogedor.</p>
+                        <div class="testimonial-author">Sarah Johnson</div>
+                        <div class="testimonial-role">Diseñadora de Interiores</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">La colección de la costa británica es un regalo exclusivo que presento a mi hermana, y ella quedó absolutamente encantada. El empaque era elegante y las fragancias eran divinas.</p>
+                        <div class="testimonial-author">Michael Torres</div>
+                        <div class="testimonial-role">Cliente Leal</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">Como alguien sensible a las fragancias sintéticas, aprecio los ingredientes naturales y los aromas sutiles pero duraderos de los productos Mundo Velas.</p>
+                        <div class="testimonial-author">Emily Chen</div>
+                        <div class="testimonial-role">Advocata de Bienestar</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>¿Listo para Transformar tu Espacio?</h2>
+            <p>Crea tu cuenta para explorar nuestra colección completa, guarda tus favoritos y disfruta de recomendaciones personalizadas.</p>
+            <a href="../BSLOGIN/index2.html" class="btn btn-cta">Iniciar Sesión para Ver Más</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h4 class="footer-title">Mundo Velas</h4>
+                    <p>Creamos momentos de calidez y tranquilidad a través de nuestras velas artesanales desde 2010.</p>
+                    <div class="social-icons">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="Pinterest"><i class="fab fa-pinterest"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="footer-title">Links Rápidos</h5>
+                    <div class="footer-links">
+                        <a href="../BSHOME/homemain.html">Inicio</a>
+                        <a href="../BSLOGIN/index2.html">Iniciar Sesión</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="footer-title">Información de contacto</h5>
+                    <p><i class="fas fa-map-marker-alt me-2"></i> Calle Velas 123, Bucaramanga, Colombia</p>
+                    <p><i class="fas fa-phone me-2"></i> +57 310 123 4567</p>
+                    <p><i class="fas fa-envelope me-2"></i> info@mundovelas.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Mundo Velas. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap & Custom JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <script>
+        // Initialize carousel with autoplay
+        document.addEventListener('DOMContentLoaded', function() {
+            var myCarousel = document.querySelector('#productCarousel');
+            var carousel = new bootstrap.Carousel(myCarousel, {
+                interval: 5000,
+                wrap: true
+            });
+        });
+    </script>
+</body>
+</html>

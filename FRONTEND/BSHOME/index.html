@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+</style>
+</style>
+    <meta charset="UTF-8">
+    <script type="module" src="js/scripts.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundo Velas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #ff0000;
+            --secondary-color: #f9f5f0;
+            --accent-color: #5d4037;
+            --text-color: #333333;
+            --light-text: #777777;
+        }
+        
+        body {
+            color: var(--text-color);
+            background-color: #fff;
+        }
+        
+        .bg-red {
+            background-color: var(--primary-color) !important;
+        }
+        
+        .navbar-nav .nav-link {
+            margin-right: 20px;
+        }
+        
+        .navbar-brand-custom {
+            margin-left: 43%;
+        }
+        
+        .hero-section {
+            position: relative;
+            height: 80vh;
+            overflow: hidden;
+        }
+        
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .hero-slide.active {
+            opacity: 1;
+        }
+        
+        .hero-content {
+            position: absolute;
+            bottom: 20%;
+            left: 10%;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            max-width: 600px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn-hero {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        
+        .btn-hero:hover {
+            background-color: #b71c1c;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 4rem 0 3rem;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 15px auto;
+        }
+        
+        .product-card {
+            border: none;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .product-card img {
+            height: 280px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .product-card .card-body {
+            padding: 1.5rem;
+        }
+        
+        .product-card .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--accent-color);
+        }
+        
+        .product-card .card-text {
+            color: var(--light-text);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .read-more {
+            color: var(--primary-color);
+            font-weight: 500;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+        .testimonials-section {
+            background-color: var(--secondary-color);
+            padding: 5rem 0;
+            margin: 5rem 0;
+        }
+        
+        .testimonial-slider {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial {
+            text-align: center;
+            padding: 0 20px;
+            display: none;
+        }
+        
+        .testimonial.active {
+            display: block;
+            animation: fadeIn 1s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .testimonial-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .testimonial-text:before,
+        .testimonial-text:after {
+            font-size: 4rem;
+            color: var(--primary-color);
+            opacity: 0.2;
+            position: absolute;
+        }
+        
+        .testimonial-text:before {
+            content: "“";
+            top: -20px;
+            left: -30px;
+        }
+        
+        .testimonial-text:after {
+            content: "”";
+            bottom: -40px;
+            right: -30px;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+        
+        .testimonial-role {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+        
+        .testimonial-controls {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .testimonial-dot.active {
+            background-color: var(--primary-color);
+            transform: scale(1.3);
+        }
+        
+        .newsletter-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('newsletter-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .form-control {
+            padding: 15px;
+            border-radius: 0;
+            border: none;
+        }
+        
+        .btn-newsletter {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 0;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-newsletter:hover {
+            background-color: #b71c1c;
+        }
+        
+        footer {
+            background-color: #222;
+            color: #fff;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-title {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+            transition: all 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icons a {
+            color: white;
+            background-color: rgba(255,255,255,0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content {
+                left: 5%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+</body>
+
+    <!-- Navbar superior -->
+    <nav class="navbar bg-red">
+        <div class="container-fluid">
+            <a class="navbar-brand navbar-brand-custom d-flex align-items-center" href="../BSHOME/index.html">
+                <img src="ruta-del-logo.png" alt="Logo" width="34" height="40" class="d-inline-block align-text-top me-2">
+                <span class="text-center brand-text-black">Mundo Velas</span>
+            </a>
+
+          <div class="d-flex align-items-center gap-3">
+            
+               <a href="../BSCART/index.html" class="position-relative" style="text-decoration: none;">
+             <img src="ruta-de-tu-imagen-carrito.png" alt="Carrito" style="width: 32px; height: 32px; object-fit: contain;">
+
+             <span id="cart-counter" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none;">
+            0
+        </span>
+     </a>
+
+            <a class="navbar-brand profile-link" href="../BSUSERPAGE/profilemain.html">
+                <img src="ruta-del-icono-perfil.png" alt="Profile" width="30" height="30">
+            </a>
+            
+        </div>
+    </div>
+</nav>
+
+
+    <!-- Navbar inferior -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                    <a class="nav-link" href="#" data-home>Inicio</a>
+                    <a class="nav-link" href="../BSCATALOG/index.html">Velas</a>
+                    <a class="nav-link" href="../BSESSENCE/index.html">Esencias</a>
+                    <a class="nav-link" href="../BSGIFTSET/index.html">Set de Regalos</a>
+                    <a class="nav-link" href="../BSMISSION/index.html">Misión & Metas</a>
+                    <a class="nav-link" href="../BSABOUT/index.html">Sobre Nosotros</a>
+            </div>
+          </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Slider -->
+<div class="hero-section">
+    <div class="hero-slide active" style="background-image: url('hero1.jpg');">
+        <div class="hero-content">
+            <h1>Ilumina tu espacio</h1>
+            <p>Descubre nuestra exquisita colección de velas artesanales que transforman cualquier habitación en un santuario de luz y fragancia.</p>
+            <a href="../BSCATALOG/index.html" class="btn btn-hero">Comprar Ahora</a>
+        </div>
+    </div>
+    <div class="hero-slide" style="background-image: url('hero4.jpg');">
+        <div class="hero-content">
+            <h1>Fragancias elaboradas artesanalmente</h1>
+            <p>Cada vela es cuidadosamente elaborada con ingredientes premium para crear una experiencia sensorial inolvidable.</p>
+            <a href="../BSESSENCE/index.html" class="btn btn-hero">Explorar Fragancias</a>
+        </div>
+    </div>
+    <div class="hero-slide" style="background-image: url('hero3.jpg');">
+        <div class="hero-content">
+            <h1>Regalos perfectos para cualquier ocasión.</h1>
+            <p>Nuestras velas, con su hermosa presentación, son el regalo perfecto para tus seres queridos o un capricho especial para ti.</p>
+            <a href="../BSGIFTSET/index.html" class="btn btn-hero">Ver Set de Regalos</a>
+        </div>
+    </div>
+</div>
+
+    <!-- Productos destacados -->
+    <div class="container mt-5">
+        <h2 class="section-title">Productos Destacados</h2>
+        <div class="row">
+            <!-- Producto 1 -->
+            <div class="col-md-3">
+                <div class="product-card">
+                    <img src="limebasilcandle1.jpg" class="card-img-top" alt="Lime Basil & Mandarin">
+                    <div class="card-body">
+                        <h5 class="card-title">Lime Basil & Mandarin</h5>
+                        <p class="card-text">Déjese llevar por una fresca brisa tropical. La albahaca especiada y el aromático tomillo blanco le dan un toque inesperado al aroma de las limas.</p>
+                        <a href="#" class="read-more">Descubrir Más <i class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Producto 2 -->
+            <div class="col-md-3">
+                <div class="product-card">
+                    <img src="englishpear.jpg" class="card-img-top" alt="English Pear & Freesia">
+                    <div class="card-body">
+                        <h5 class="card-title">English Pear & Freesia</h5>
+                        <p class="card-text">Llene la habitación con huertos bañados en luz dorada, calentando las curvas rojizas de deliciosas peras.</p>
+                        <a href="#" class="read-more">Descubrir Más <i class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Producto 3 -->
+            <div class="col-md-3">
+                <div class="product-card">
+                    <img src="pomegranate.jpg" class="card-img-top" alt="Pomegranate Noir">
+                    <div class="card-body">
+                        <h5 class="card-title">Pomegranate Noir</h5>
+                        <p class="card-text">Llene la habitación con granadas jugosas y madera de guaiac fumada transportada por el aire cálido de la tarde.</p>
+                        <a href="#" class="read-more">Descubrir Más <i class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Producto 4 -->
+            <div class="col-md-3">
+                <div class="product-card">
+                    <img src="woodsage.jpg" class="card-img-top" alt="Wood Sage & Sea Salt">
+                    <div class="card-body">
+                        <h5 class="card-title">Wood Sage & Sea Salt</h5>
+                        <p class="card-text">Llene la habitación con la frescura de la costa británica, aire revitalizado con sal marina y el aroma mineral de los acantilados rocosos.</p>
+                        <a href="#" class="read-more">Descubrir Más <i class="fas fa-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+        <button class="btn btn-outline-primary btn-lg" type="button" onclick="window.location.href='../BSCATALOG/index.html'">Ver todos los productos</button>
+
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial active">
+                    <p class="testimonial-text">Estas velas transformaron por completo mi hogar. Los aromas son duraderos y la calidad es excepcional. ¡Soy clienta de por vida!</p>
+                    <div class="testimonial-author">Maria Rodriguez</div>
+                    <div class="testimonial-role">Cliente fiel durante 3 años.</div>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">Le compré el set de regalo a mi esposa por su cumpleaños y le encantó. El empaque era elegante y las fragancias, divinas.</p>
+                    <div class="testimonial-author">James Wilson</div>
+                    <div class="testimonial-role">Cliente por primera vez</div>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">Como diseñadora de interiores, siempre recomiendo Mundo Velas a mis clientes. Le dan el toque final perfecto a cualquier espacio.</p>
+                    <div class="testimonial-author">Sophia Chen</div>
+                    <div class="testimonial-role">Diseñadora de Interiores Profesional</div>
+                </div>
+                <div class="testimonial-controls">
+                    <div class="testimonial-dot active" data-index="0"></div>
+                    <div class="testimonial-dot" data-index="1"></div>
+                    <div class="testimonial-dot" data-index="2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <h2 class="section-title" style="color: #fff;">Mantente iluminado</h2>
+            <p class="text-center mb-4">Suscríbete a nuestro boletín para recibir ofertas exclusivas, novedades y consejos para el cuidado de las velas.</p>
+            <form class="newsletter-form d-flex">
+                <input type="email" class="form-control me-2" placeholder="Tu dirección de correo electrónico">
+                <button type="submit" class="btn btn-newsletter">Suscribirse</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h4 class="footer-title">Mundo Velas</h4>
+                    <p>Creamos momentos de calidez y tranquilidad a través de nuestras velas artesanales desde 2010.</p>
+                    <div class="social-icons">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="Pinterest"><i class="fab fa-pinterest"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5 class="footer-title">Comprar</h5>
+                    <div class="footer-links">
+                        <a href="#">Todas las Velas</a>
+                        <a href="#">Nuevos Llegados</a>
+                        <a href="#">Más Vendidas</a>
+                        <a href="#">Sets de Regalo</a>
+                        <a href="#">Ofertas</a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5 class="footer-title">Ayuda</h5>
+                    <div class="footer-links">
+                        <a href="#">Envíos y Devoluciones</a>
+                        <a href="#">Cuidado de las Velas</a>
+                        <a href="#">Preguntas Frecuentes</a>
+                        <a href="#">Contáctanos</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="footer-title">Información de Contacto</h5>
+                    <p><i class="fas fa-map-marker-alt me-2"></i> Calle Velas 123, Bucaramanga, Colombia</p>
+                    <p><i class="fas fa-phone me-2"></i> (310) 123-4567</p>
+                    <p><i class="fas fa-envelope me-2"></i> info@mundovelas.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Mundo Velas. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap & Custom JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+
+    <script>
+    // Authentication and Profile Navigation
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if user is authenticated
+        checkUserAuth();
+        
+        // Setup profile icon click handler
+        setupProfileNavigation();
+    });
+
+    // Check authentication
+    function checkUserAuth() {
+        const token = localStorage.getItem('token');
+        
+        if (!token) {
+            // Redirect to login if no token found
+            window.location.href = '../BSLOGIN/index2.html';
+            return;
+        }
+        
+        console.log('User is authenticated');
+        
+        // Optional: Display user info or customize experience
+        const userData = JSON.parse(localStorage.getItem('user') || '{}');
+        if (userData.firstName || userData.displayName) {
+            const userName = userData.firstName || userData.displayName;
+            console.log('Welcome back, ' + userName);
+          
+        }
+    }
+
+    // Handle profile icon click
+    function setupProfileNavigation() {
+        const profileIcon = document.querySelector('.profile-link');
+        
+        if (profileIcon) {
+            // Add visual feedback on hover
+            profileIcon.style.transition = 'transform 0.2s ease';
+            profileIcon.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1)';
+            });
+            profileIcon.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+            
+            console.log('Profile navigation setup complete');
+        } else {
+            console.warn('Profile icon not found - make sure it has the "profile-link" class');
+        }
+    }
+
+    // Hero Slider Functionality
+    const heroSlides = document.querySelectorAll('.hero-slide');
+    let currentSlide = 0;
+    
+    function showSlide(index) {
+        heroSlides.forEach(slide => slide.classList.remove('active'));
+        heroSlides[index].classList.add('active');
+    }
+    
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % heroSlides.length;
+        showSlide(currentSlide);
+    }
+    
+    // Change slide every 5 seconds
+    setInterval(nextSlide, 5000);
+    
+    // Testimonial Slider
+    const testimonials = document.querySelectorAll('.testimonial');
+    const dots = document.querySelectorAll('.testimonial-dot');
+    let currentTestimonial = 0;
+    
+    function showTestimonial(index) {
+        testimonials.forEach(testimonial => testimonial.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+        
+        testimonials[index].classList.add('active');
+        dots[index].classList.add('active');
+    }
+    
+    dots.forEach(dot => {
+        dot.addEventListener('click', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            showTestimonial(index);
+            currentTestimonial = index;
+        });
+    });
+    
+    function nextTestimonial() {
+        currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+        showTestimonial(currentTestimonial);
+    }
+    
+    // Change testimonial every 7 seconds
+    setInterval(nextTestimonial, 7000);
+</script>
+    <script src="../js/cart-global.js"></script>
+</html>

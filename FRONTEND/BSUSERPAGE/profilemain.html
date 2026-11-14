@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario - Mundo Velas</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #ff0000;
+            --dark-red: #cc0000;
+            --light-bg: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Navbar styles */
+        .bg-red {
+            background-color: var(--primary-red);
+        }
+        
+        .navbar-nav .nav-link {
+            margin-right: 20px;
+        }
+        
+        .navbar-brand-custom {
+            margin-left: 43%;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar-brand-custom {
+                margin-left: 0;
+            }
+        }
+        
+        /* Profile container */
+        .profile-container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .profile-header {
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 50px;
+            color: white;
+        }
+        
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .profile-body {
+            padding: 30px;
+        }
+        
+        .info-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-red);
+        }
+        
+        .info-card h5 {
+            color: var(--primary-red);
+            margin-bottom: 15px;
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .info-value {
+            color: #333;
+        }
+        
+        .btn-logout {
+            background: linear-gradient(to right, var(--primary-red), var(--dark-red));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        .btn-logout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+        }
+        
+        .login-method-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+        }
+        
+        .edit-btn {
+            background: transparent;
+            border: 1px solid var(--primary-red);
+            color: var(--primary-red);
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+        
+        .edit-btn:hover {
+            background: var(--primary-red);
+            color: white;
+        }
+        
+        .empty-field {
+            color: #999;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+        <!-- Edit Profile Modal -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProfileModalLabel">Editar Perfil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProfileForm">
+                        <div class="mb-3">
+                            <label for="editFirstName" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="editFirstName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editLastName" class="form-label">Apellido</label>
+                            <input type="text" class="form-control" id="editLastName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="editEmail">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editPhone" class="form-label">Número de Teléfono</label>
+                            <input type="text" class="form-control" id="editPhone">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="saveProfileChanges">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar superior -->
+    <nav class="navbar bg-red">
+        <div class="container-fluid">
+            <a class="navbar-brand navbar-brand-custom d-flex align-items-center" href="../BSHOME/index.html">
+                <img src="ruta-del-logo.png" alt="Logo" width="34" height="40" class="d-inline-block align-text-top me-2">
+                <span class="text-center brand-text-black">Mundo Velas</span>
+            </a>
+
+          <div class="d-flex align-items-center gap-3">
+            
+               <a href="../BSCART/index.html" class="position-relative" style="text-decoration: none;">
+             <img src="ruta-de-tu-imagen-carrito.png" alt="Carrito" style="width: 32px; height: 32px; object-fit: contain;">
+
+             <span id="cart-counter" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none;">
+            0
+        </span>
+     </a>
+
+            <a class="navbar-brand profile-link" href="../BSUSERPAGE/profilemain.html">
+                <img src="ruta-del-icono-perfil.png" alt="Profile" width="30" height="30">
+            </a>
+            
+        </div>
+    </div>
+</nav>
+    
+    <!-- Navbar inferior -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="../BSHOME/index.html">Inicio</a>
+                    <a class="nav-link active" href="#" id="profile-link">Mi Perfil</a>
+                    <a class="nav-link" href="../BSFAVORITES/index.html" id="favorites-link">Favoritos</a>
+                    <a class="nav-link" href="../BSUSERPAGE/orders.html" id="orders-link">Mis Compras</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Content -->
+    <div class="profile-container">
+        <div class="profile-header">
+            <span class="login-method-badge" id="login-method-badge">Login Manual</span>
+            <div class="profile-avatar" id="profile-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <h2 id="welcome-message">¡Bienvenido, User!</h2>
+            <p id="user-email">user@example.com</p>
+        </div>
+        
+        <div class="profile-body">
+            <!-- Personal Information Card -->
+            <div class="info-card">
+                <h5><i class="fas fa-user-circle me-2"></i>Información Personal</h5>
+                <div class="info-item">
+                    <span class="info-label">Nombre:</span>
+                    <span class="info-value" id="current-firstName">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Apellido:</span>
+                    <span class="info-value" id="current-lastName">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Nombre Completo:</span>
+                    <span class="info-value" id="current-fullName">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Email:</span>
+                    <span class="info-value" id="current-email">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Teléfono:</span>
+                    <span class="info-value" id="current-phone">-</span>
+                </div>
+            </div>
+            
+            <!-- Account Information Card -->
+            <div class="info-card">
+                <h5><i class="fas fa-info-circle me-2"></i>Información de la Cuenta</h5>
+                <div class="info-item">
+                    <span class="info-label">Método de Inicio de Sesión:</span>
+                    <span class="info-value" id="login-method">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Cuenta Creada:</span>
+                    <span class="info-value" id="account-created">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Último Inicio de Sesión:</span>
+                    <span class="info-value" id="last-login">-</span>
+                </div>
+            </div>
+            
+            <!-- Actions Card -->
+            <div class="info-card">
+                <h5><i class="fas fa-cog me-2"></i>Acciones de la Cuenta</h5>
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-outline-danger" id="editProfileButton">
+                        <i class="fas fa-edit me-2"></i>Editar Perfil
+                    </button>
+                    <button type="button" class="btn btn-outline-danger" id="deleteProfileButton">
+                        <i class="fas fa-trash-alt me-2"></i>Eliminar Cuenta
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Logout Button -->
+            <button class="btn-logout" id="logoutButton">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+            </button>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Unified User Profile Script
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check authentication and load user data
+            checkAuthAndLoadUser();
+            
+            // Set up event listeners
+            document.getElementById('logoutButton').addEventListener('click', handleLogout);
+            document.getElementById('deleteProfileButton').addEventListener('click', handleDeleteAccount);
+            document.getElementById('editProfileButton').addEventListener('click', handleEditProfile);
+            
+            // Set up navigation links based on login method
+            setupNavigation();
+        });
+        
+        // Check authentication and load user data
+        function checkAuthAndLoadUser() {
+            const token = localStorage.getItem('token');
+            const loginMethod = localStorage.getItem('loginMethod');
+            
+            if (!token) {
+                // Redirect to login if no token found
+                window.location.href = '../BSLOGIN/index2.html';
+                return;
+            }
+            
+            // Display login method badge
+            document.getElementById('login-method-badge').textContent = 
+                loginMethod === 'google' ? 'Google Login' : 'Manual Login';
+            document.getElementById('login-method').textContent = 
+                loginMethod === 'google' ? 'Google' : 'Email/Contraseña';
+            
+            if (loginMethod === 'google') {
+                loadGoogleUserData();
+            } else {
+                loadManualUserData();
+            }
+        }
+        
+        // Load user data for Google login
+        function loadGoogleUserData() {
+            const userData = JSON.parse(localStorage.getItem('user') || '{}');
+            
+            // Display user data
+            document.getElementById('welcome-message').textContent = `Bienvenido, ${userData.displayName || 'User'}!`;
+            document.getElementById('user-email').textContent = userData.email || '';
+            
+            // Set profile values
+            document.getElementById('current-fullName').textContent = userData.displayName || 'Not provided';
+            document.getElementById('current-email').textContent = userData.email || 'Not provided';
+            
+            // For Google users, these fields might be empty
+            document.getElementById('current-firstName').textContent = '-';
+            document.getElementById('current-lastName').textContent = '-';
+            document.getElementById('current-phone').textContent = '-';
+            
+            // Set profile photo if available
+            if (userData.photoURL) {
+                document.getElementById('profile-avatar').innerHTML = 
+                    `<img src="${userData.photoURL}" alt="Profile Photo">`;
+            }
+            
+            // Set account info
+            const now = new Date();
+            document.getElementById('account-created').textContent = now.toLocaleDateString();
+            document.getElementById('last-login').textContent = now.toLocaleString();
+        }
+        
+// Load user data for manual login - UPDATED VERSION
+function loadManualUserData() {
+    const userData = JSON.parse(localStorage.getItem('user') || '{}');
+    
+    console.log('Loading manual user data:', userData); // Debug log
+    
+    // Display user data
+    const firstName = userData.firstName || '';
+    const lastName = userData.lastName || '';
+    const fullName = `${firstName} ${lastName}`.trim();
+    
+    // Update the header section
+    document.getElementById('welcome-message').textContent = `Bienvenido, ${firstName || 'User'}!`;
+    document.getElementById('user-email').textContent = userData.email || '';
+    
+    // Update profile values in the info cards
+    document.getElementById('current-firstName').textContent = firstName || '-';
+    document.getElementById('current-lastName').textContent = lastName || '-';
+    document.getElementById('current-fullName').textContent = fullName || 'Not provided';
+    document.getElementById('current-email').textContent = userData.email || 'Not provided';
+    document.getElementById('current-phone').textContent = userData.phone || '-';
+    
+    // Set account info
+    const now = new Date();
+    document.getElementById('account-created').textContent = now.toLocaleDateString();
+    document.getElementById('last-login').textContent = now.toLocaleString();
+    
+    console.log('Manual user data loaded successfully'); // Debug log
+}
+        // Setup navigation based on login method
+        function setupNavigation() {
+            const loginMethod = localStorage.getItem('loginMethod');
+            const homeLink = document.getElementById('home-link');
+            const favoritesLink = document.getElementById('favorites-link');
+            
+            if (loginMethod === 'google') {
+                homeLink.href = '../BSHOMEGOOGLE/index.html';
+                favoritesLink.href = '../BSFAVORITES/favorites-google.html';
+            } else {
+                homeLink.href = '../BSHOMEUSER/index.html';
+                favoritesLink.href = '../BSFAVORITES/favorites.html';
+            }
+        }
+        
+        // Handle logout
+        function handleLogout() {
+            const loginMethod = localStorage.getItem('loginMethod');
+            
+            if (loginMethod === 'google') {
+                // Import Firebase auth for sign out
+                import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js')
+                    .then(({ getAuth, signOut }) => {
+                        const auth = getAuth();
+                        signOut(auth).then(() => {
+                            // Clear localStorage and redirect
+                            localStorage.clear();
+                            window.location.href = '../BSLOGIN/index2.html';
+                        }).catch((error) => {
+                            console.error('Logout error:', error);
+                            // Fallback: clear localStorage and redirect anyway
+                            localStorage.clear();
+                            window.location.href = '../BSLOGIN/index2.html';
+                        });
+                    })
+                    .catch(() => {
+                        // If Firebase fails, still clear data and redirect
+                        localStorage.clear();
+                        window.location.href = '../BSLOGIN/index2.html';
+                    });
+            } else {
+                // For manual login, just clear data and redirect
+                localStorage.clear();
+                window.location.href = '../BSLOGIN/index2.html';
+            }
+        }
+        function handleSaveProfileChanges() {
+    const loginMethod = localStorage.getItem('loginMethod');
+    
+    if (loginMethod === 'manual') {
+        const updatedData = {
+            firstName: document.getElementById('editFirstName').value,
+            lastName: document.getElementById('editLastName').value,
+            email: document.getElementById('editEmail').value,
+            phone: document.getElementById('editPhone').value
+        };
+        
+        // Call your backend API to update the user
+        const token = localStorage.getItem('token');
+        
+        console.log('Sending update request:', updatedData);
+        console.log('Current localStorage user before update:', localStorage.getItem('user'));
+        
+        fetch('http://localhost:3000/api/users/update', {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedData)
+        })
+        .then(response => {
+            console.log('Response status:', response.status);
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Failed to update profile. Status: ' + response.status);
+            }
+        })
+        .then(updatedUser => {
+            console.log('Update successful, received:', updatedUser);
+            
+            // Update localStorage with new data
+            localStorage.setItem('user', JSON.stringify(updatedUser));
+            console.log('LocalStorage after update:', localStorage.getItem('user'));
+            
+            // Refresh the displayed data
+            loadManualUserData();
+            
+            // Close the modal
+            const editModal = bootstrap.Modal.getInstance(document.getElementById('editProfileModal'));
+            if (editModal) {
+                editModal.hide();
+            }
+            
+            alert('Profile updated successfully!');
+        })
+        .catch(error => {
+            console.error('Update error:', error);
+            alert('Error updating profile: ' + error.message);
+        });
+    }
+}
+// Unified delete account function
+function handleDeleteAccount() {
+    if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+        const token = localStorage.getItem('token');
+        const loginMethod = localStorage.getItem('loginMethod');
+        
+        fetch('http://localhost:3000/api/users/delete', {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ loginMethod: loginMethod })
+        })
+        .then(response => {
+            if (response.ok) {
+                localStorage.clear();
+                alert('Your account has been deleted successfully.');
+                window.location.href = '../BSLOGIN/index2.html';
+            } else {
+                throw new Error('Failed to delete account');
+            }
+        })
+        .catch(error => {
+            console.error('Delete account error:', error);
+            
+            if (loginMethod === 'google') {
+                alert('Account deletion failed. For Google accounts, you may need to remove app access through your Google Account settings.');
+            } else {
+                alert('Error deleting account. Please try again.');
+            }
+        });
+    }
+}
+        
+// Handle edit profile
+function handleEditProfile() {
+    const loginMethod = localStorage.getItem('loginMethod');
+    
+    if (loginMethod === 'google') {
+        alert('Google users can update their profile information through their Google account settings.');
+    } else {
+        // For manual users, show edit modal with current data
+        const userData = JSON.parse(localStorage.getItem('user') || '{}');
+        
+        document.getElementById('editFirstName').value = userData.firstName || '';
+        document.getElementById('editLastName').value = userData.lastName || '';
+        document.getElementById('editEmail').value = userData.email || '';
+        document.getElementById('editPhone').value = userData.phone || '';
+        
+        // Show the modal
+        const editModal = new bootstrap.Modal(document.getElementById('editProfileModal'));
+        editModal.show();
+    }
+}
+
+// Save profile changes
+function handleSaveProfileChanges() {
+    const loginMethod = localStorage.getItem('loginMethod');
+    
+    if (loginMethod === 'manual') {
+        const updatedData = {
+            firstName: document.getElementById('editFirstName').value,
+            lastName: document.getElementById('editLastName').value,
+            email: document.getElementById('editEmail').value,
+            phone: document.getElementById('editPhone').value
+        };
+        
+        // Call your backend API to update the user
+        const token = localStorage.getItem('token');
+        
+        console.log('Sending update request to /api/users/update:', updatedData);
+        
+        fetch('http://localhost:3000/api/users/update', {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedData)
+        })
+        .then(response => {
+            console.log('Response status:', response.status);
+            return response.json().then(data => {
+                if (!response.ok) {
+                    throw new Error(data.message || 'Failed to update profile');
+                }
+                return data;
+            });
+        })
+        .then(data => {
+            console.log('Update successful, received:', data);
+            
+            if (data.success && data.user) {
+                // Update localStorage with new data
+                localStorage.setItem('user', JSON.stringify(data.user));
+                console.log('LocalStorage updated with:', data.user);
+                
+                // Refresh the displayed data
+                loadManualUserData();
+                
+                // Close the modal
+                const editModal = bootstrap.Modal.getInstance(document.getElementById('editProfileModal'));
+                if (editModal) {
+                    editModal.hide();
+                }
+                
+                alert('Profile updated successfully!');
+            } else {
+                throw new Error('Invalid response format from server');
+            }
+        })
+        .catch(error => {
+            console.error('Update error:', error);
+            alert('Error updating profile: ' + error.message);
+        });
+    }
+}
+        
+        // Attach save changes event
+        document.getElementById('saveProfileChanges').addEventListener('click', handleSaveProfileChanges);
+    </script>
+    <script src="../js/cart-global.js"></script>
+</div>
+</body>
+</html>

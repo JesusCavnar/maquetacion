@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nosotros- Mundo Velas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #ff0000;
+            --dark-red: #cc0000;
+            --light-bg: #f8f9fa;
+            --accent-color: #5d4037;
+            --text-color: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .bg-red {
+            background-color: var(--primary-red);
+        }
+        
+        .navbar-nav .nav-link {
+            margin-right: 20px;
+        }
+        
+        .navbar-brand-custom {
+            margin-left: 43%;
+        }
+        
+        /* About Hero Section */
+        .about-hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/workshop-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 8rem 0;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .about-hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .about-hero .lead {
+            font-size: 1.5rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            margin: 4rem 0 3rem;
+            position: relative;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-red);
+            margin: 15px auto;
+        }
+        
+        /* Story Section */
+        .story-section {
+            padding: 4rem 0;
+        }
+        
+        .story-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            background: white;
+        }
+        
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .story-img {
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .story-card:hover .story-img {
+            transform: scale(1.05);
+        }
+        
+        /* Timeline */
+        .timeline-section {
+            position: relative;
+            padding: 4rem 0;
+        }
+        
+        .timeline-section:before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-red);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 45%;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+            padding-right: 4rem;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 55%;
+            padding-left: 4rem;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-red);
+            border-radius: 50%;
+            top: 10px;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--primary-red);
+        }
+        
+        .timeline-item:nth-child(odd):before {
+            right: -10px;
+        }
+        
+        .timeline-item:nth-child(even):before {
+            left: -10px;
+        }
+        
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .timeline-year {
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        /* Team Section */
+        .team-section {
+            background-color: var(--light-bg);
+            padding: 5rem 0;
+            margin: 4rem 0;
+        }
+        
+        .team-member {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 1rem;
+        }
+        
+        .team-member-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 5px solid white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover .team-member-img {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .team-member h3 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .team-member-role {
+            color: var(--primary-red);
+            font-weight: 500;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .team-member-quote {
+            font-style: italic;
+            color: #666;
+            position: relative;
+            padding: 0 1rem;
+        }
+        
+        .team-member-quote:before {
+            content: "“";
+            font-size: 2rem;
+            color: var(--primary-red);
+            position: absolute;
+            left: -10px;
+            top: -10px;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            padding: 4rem 0;
+        }
+        
+        .contact-card {
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+            color: white;
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: 0 15px 35px rgba(255,0,0,0.2);
+        }
+        
+        .contact-info-item {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        /* Social Links */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-red);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--dark-red);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255,0,0,0.3);
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, var(--primary-red), var(--dark-red));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 1rem;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-hero .lead {
+                font-size: 1.2rem;
+            }
+            
+            .timeline-section:before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                text-align: left !important;
+                padding-left: 4rem !important;
+                padding-right: 1rem !important;
+            }
+            
+            .timeline-item:nth-child(odd):before,
+            .timeline-item:nth-child(even):before {
+                left: 20px;
+            }
+            
+            .contact-card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar superior -->
+    <nav class="navbar bg-red">
+        <div class="container-fluid">
+            <a class="navbar-brand navbar-brand-custom d-flex align-items-center" href="../BSHOME/index.html">
+                <img src="ruta-del-logo.png" alt="Logo" width="34" height="40" class="d-inline-block align-text-top me-2">
+                <span class="text-center brand-text-black">Mundo Velas</span>
+            </a>
+
+          <div class="d-flex align-items-center gap-3">
+            
+               <a href="../BSCART/index.html" class="position-relative" style="text-decoration: none;">
+             <img src="ruta-de-tu-imagen-carrito.png" alt="Carrito" style="width: 32px; height: 32px; object-fit: contain;">
+
+             <span id="cart-counter" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none;">
+            0
+        </span>
+     </a>
+
+            <a class="navbar-brand profile-link" href="../BSUSERPAGE/profilemain.html">
+                <img src="ruta-del-icono-perfil.png" alt="Profile" width="30" height="30">
+            </a>
+            
+        </div>
+    </div>
+</nav>
+
+
+    <!-- Navbar inferior -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="../BSHOME/index.html">Inicio</a>
+                    <a class="nav-link" href="../BSCATALOG/index.html">Velas</a>
+                    <a class="nav-link" href="../BSESSENCE/index.html">Esencias</a>
+                    <a class="nav-link" href="../BSGIFTSET/index.html">Set de Regalo</a>
+                    <a class="nav-link" href="../BSMISSION/index.html">Misión & Metas</a>
+                    <a class="nav-link active" href="../BSABOUT/index.html">Sobre Nosotros</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Hero -->
+    <section class="about-hero">
+        <div class="container">
+            <h1>Nuestra Historia
+            </h1>
+            <p class="lead">Desde un taller familiar hasta el reconocimiento internacional, creando momentos de luz y fragancia desde 2010.</p>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-6 stat-item">
+                    <div class="stat-number">16+</div>
+                    <div class="stat-label">Años de Excelencia</div>
+                </div>
+                <div class="col-md-3 col-6 stat-item">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Velas Artesanales</div>
+                </div>
+                <div class="col-md-3 col-6 stat-item">
+                    <div class="stat-number">4+</div>
+                    <div class="stat-label">Ciudades Servidas</div>
+                </div>
+                <div class="col-md-3 col-6 stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Artesanal</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <div class="container story-section">
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-6">
+                <h2 class="section-title">Cómo empezamos</h2>
+                <p class="fs-5 mb-4">Lo que comenzó como una apasionada exploración de las tradiciones europeas de comercialización de velas se ha convertido en Mundo Velas, una marca sinónimo de calidad, lujo, diseño, artesanía y excelencia sensorial.</p>
+                <p>La pasión de la Familia Bravo por las velas de lujo nació durante sus viajes por Italia y el Reino Unido. Inspirados por las tradiciones artesanales europeas, decidieron traer a Colombia una selección curada de las mejores fragancias y diseños de estas regiones, ofreciendo a sus clientes un pedacito de Europa en cada vela y esencia.</p>
+            </div>
+            <div class="col-lg-6">
+                <div class="story-card">
+                    <img src="aboutus1.png" class="story-img card-img-top" alt="Original workshop">
+                    <div class="card-body">
+                        <h5 class="card-title">Nuestro Primer Centro de experiencias</h5>
+                        <p class="card-text">El espacio donde los bumangueses descubrieron por primera vez el arte de las velas de lujo europeas, en un ambiente diseñado para despertar los sentidos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <h2 class="section-title">Nuestra Historia</h2>
+        <div class="timeline-section">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2010</div>
+                    <h4>El Descubrimiento</h4>
+                    <p>Durante sus viajes por Italia y el Reino Unido, La Familia Bravo descubrió el arte de las velas de lujo europeas y decidió traer esa experiencia a Colombia.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2015</div>
+                    <h4>Nace Mundo Velas</h4>
+                    <p>Abrimos nuestra primera tienda física en Bucaramanga, con una selección curada de las mejores fragancias y diseños artesanales de Europa.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2018</div>
+                    <h4>Crecimiento Local</h4>
+                    <p>Nos convertimos en el referente de velas de lujo en Santander, atendiendo a clientes que buscaban transformar sus espacios con aromas únicos.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2025</div>
+                    <h4>Expansión Digital</h4>
+                    <p>Dimos el salto al mundo digital con el lanzamiento de nuestra tienda online, llevando la experiencia Mundo Velas a toda Colombia.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2027</div>
+                    <h4>E-commerce Nacional</h4>
+                    <p>Hoy enviamos nuestras velas de lujo a todo el país, manteniendo la misma calidad y atención personalizada que nos caracteriza desde el primer día.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title">Conoce a nuestros fundadores</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="team-member">
+                        <img src="aboutus2.jpg" class="team-member-img" alt="Maria Gomez">
+                        <h3>Maria Gomez</h3>
+                        <div class="team-member-role">Maestra de Velas</div>
+                        <p class="team-member-quote">"Creo que cada vela debería contar una historia y crear una atmósfera que transforme momentos cotidianos en recuerdos entrañables."</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="team-member">
+                        <img src="aboutus3.jpg" class="team-member-img" alt="Gonzalo Bravo">
+                        <h3>Gonzalo Bravo</h3>
+                        <div class="team-member-role">Fundador & Director Creativo</div>
+                        <p class="team-member-quote">"El diseño debe involucrar todos los sentidos. Una vela no es solo luz - es fragancia, calor y la creación de ambiente."</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="team-member">
+                        <img src="aboutus4.jpg" class="team-member-img" alt="Luisa Fernandez">
+                        <h3>Luisa Fernandez</h3>
+                        <div class="team-member-role">Director de Operaciones</div>
+                        <p class="team-member-quote">"Creo que la excelencia en operaciones es la base de cualquier éxito sostenible."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <div class="container contact-section">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="contact-card">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3 class="mb-4">Visítanos</h3>
+                            <div class="contact-info-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <strong>Tienda Principal</strong><br>
+                                    Calle Velas 123, Bucaramanga, Colombia
+                                </div>
+                            </div>
+                            <div class="contact-info-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div>
+                                    <strong>Visitas al centro de experiencias</strong><br>
+                                    De lunes a viernes, de 10:00 a. m. a 3:00 p. m.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="mb-4">Contáctanos</h3>
+                            <div class="contact-info-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <strong>Servicio al Cliente</strong><br>
+                                    info@mundovelas.com<br>
+                                    +57 310 123 4567
+                                </div>
+                            </div>
+                            <div class="contact-info-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div>
+                                    <strong>Inquietudes de Mayoreo</strong><br>
+                                    wholesale@mundovelas.com
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Social Links -->
+        <div class="text-center mt-5">
+            <h3 class="section-title">Síguenos en Nuestras Redes Sociales</h3>
+            <div class="social-links">
+                <a href="#" class="social-link" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-link" title="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-link" title="Pinterest">
+                    <i class="fab fa-pinterest"></i>
+                </a>
+                <a href="#" class="social-link" title="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Authentication and Navigation Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '../BSLOGIN/index2.html';
+            }
+        });
+    </script>
+    
+    <script src="../js/nav.js"></script>
+    <script src="../js/cart-global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peony & Blush Suede Velas - Mundo Velas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .bg-red {
+            background-color: #ff0000;
+        }
+        .navbar-nav .nav-link {
+            margin-right: 20px;
+        }
+        .navbar-brand-custom {
+            margin-left: 43%;
+        }
+        .product-hero {
+            padding: 40px 0;
+        }
+        .product-image {
+            border-radius: 8px;
+            border: 1px solid #eee;
+            margin-bottom: 20px;
+            max-height: 400px;
+            width: auto;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .product-image:hover {
+            transform: scale(1.02);
+        }
+        .cursor-pointer {
+            cursor: pointer;
+        }
+        .price {
+            font-size: 1.5rem;
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        .details-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .details-list li {
+            margin-bottom: 10px;
+        }
+        .favorite-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #d32f2f;
+            transition: all 0.3s;
+        }
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+        .bg-light {
+            background-color: #f8f9fa!important;
+        }
+        .btn-outline-danger {
+            border-color: #d32f2f;
+            color: #d32f2f;
+        }
+        .btn-outline-danger:hover {
+            background-color: #d32f2f;
+            color: white;
+        }
+        .thumbnail-img {
+            height: 80px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .thumbnail-img:hover {
+            transform: scale(1.05);
+            border: 1px solid #d32f2f;
+        }
+        /* Modal for enlarged images */
+        .enlarged-img {
+            max-width: 90%;
+            max-height: 80vh;
+        }
+        .modal-thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            margin-right: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .modal-thumbnail.active {
+            border-color: #d32f2f;
+        }
+        .brand-text-black {
+            color: black;
+        }
+        .brand-text-center-black {
+            color: black;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bars -->
+    <nav class="navbar bg-red">
+        <div class="container-fluid">
+            <a class="navbar-brand navbar-brand-custom d-flex align-items-center" href="../BSHOME/index.html">
+                <img src="ruta-del-logo.png" alt="Logo" width="34" height="40" class="d-inline-block align-text-top me-2">
+                <span class="text-center brand-text-black">Mundo Velas</span>
+            </a>
+
+          <div class="d-flex align-items-center gap-3">
+            
+               <a href="../BSCART/index.html" class="position-relative" style="text-decoration: none;">
+             <img src="ruta-de-tu-imagen-carrito.png" alt="Carrito" style="width: 32px; height: 32px; object-fit: contain;">
+
+             <span id="cart-counter" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none;">
+            0
+        </span>
+     </a>
+
+            <a class="navbar-brand profile-link" href="../BSUSERPAGE/profilemain.html">
+                <img src="ruta-del-icono-perfil.png" alt="Profile" width="30" height="30">
+            </a>
+            
+        </div>
+    </div>
+</nav>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" title="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="../BSHOME/index.html">Inicio</a>
+                    <a class="nav-link" href="../BSCATALOG/index.html">Velas</a>
+                    <a class="nav-link" href="../BSESSENCE/index.html">Esencias</a>
+                    <a class="nav-link" href="../BSGIFTSET/index.html">Set de Regalo</a>
+                    <a class="nav-link" href="../BSMISSION/index.html">Misión & Metas</a>
+                    <a class="nav-link" href="../BSABOUT/index.html">Sobre Nosotros</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const token = localStorage.getItem('token');
+        
+        if (!token) {
+            window.location.href = '../BSLOGIN/index2.html';
+        }
+    });
+</script>
+
+    <!-- Include navigation script -->
+    <script src="../js/nav.js"></script>
+    <!-- Image Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <img id="enlargedImage" src="" class="enlarged-img" alt="Enlarged product image">
+                    <div class="d-flex justify-content-center mt-3">
+                        <img src="limebasilcandle1.jpg" class="modal-thumbnail active" onclick="changeModalImage(this)">
+                        <img src="limebasilcandle2.jpg" class="modal-thumbnail" onclick="changeModalImage(this)">
+                        <img src="limebasilcandle3.jpg" class="modal-thumbnail" onclick="changeModalImage(this)">
+                        <img src="limebasilcandle4.jpg" class="modal-thumbnail" onclick="changeModalImage(this)">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Content -->
+    <section class="product-hero">
+        <div class="container">
+            <div class="row">
+                <!-- Product Images -->
+                <div class="col-md-6">
+                    <img src="limebasilcandle1.jpg" class="img-fluid product-image" alt="Lime Basil & Mandarin Candle" 
+                         onclick="openImageModal('limebasilcandle1.jpg')">
+                    <div class="row g-2">
+                        <div class="col-3">
+                            <img src="limebasilcandle2.jpg" class="img-fluid thumbnail-img" alt="Lime Basil & Mandarin Angle 1" 
+                                 onclick="openImageModal('limebasilcandle2.jpg')">
+                        </div>
+                        <div class="col-3">
+                            <img src="limebasilcandle3.jpg" class="img-fluid thumbnail-img" alt="Lime Basil & Mandarin Angle 2" 
+                                 onclick="openImageModal('limebasilcandle3.jpg')">
+                        </div>
+                        <div class="col-3">
+                            <img src="limebasilcandle4.jpg" class="img-fluid thumbnail-img" alt="Lime Basil & Mandarin Packaging" 
+                                 onclick="openImageModal('limebasilcandle4.jpg')">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Details -->
+                <div class="col-md-6">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h1>Lime Basil & Mandarin</h1>
+                    </div>
+                      <p class="text-muted">Jo Malone</p>
+                      <div class="my-3">
+                      <span class="price">$ 495.000</span>
+                      </div>
+
+                    <button id="addToCartBtn" class="btn btn-danger btn-lg w-100 mb-3" onclick="addToCart()">
+                        <i class="fas fa-shopping-cart me-2"></i>Añadir al Carrito
+                         </button>
+                    <button id="favoriteBtn" class="btn btn-outline-danger btn-lg w-100 mb-3 btn-favorite">
+                        <i class="far fa-heart me-2"></i>Agregar a Favoritos
+                         </button>
+                    <button class="btn btn-danger btn-lg w-100 mb-3" onclick="viewInStore()">
+                         <i class="fas fa-store me-2"></i>Ver en Tienda
+                         </button>
+
+                    <hr class="my-4">
+
+                    <ul class="details-list">
+                        <li><strong>Fragancia:</strong> Lima, albahaca, tomillo, mandarina</li>
+                        <li><strong>Tamaño:</strong> 300g / 60h tiempo de quema</li>
+                        <li><strong>Material:</strong> Mezcla de cera premium</li>
+                        <li><strong>Origen:</strong> Fabricado en Inglaterra</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Description -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="mb-4">Descripción</h2>
+                    <p>La vela Deluxe Lime Basil & Mandarin presenta la fragancia emblemática de Jo Malone en formato vela. La vitalidad de la lima se une a la albahaca aromática y al tomillo blanco especiado, mientras que la dulzura de la mandarina armoniza la composición. Este aroma vibrante y herbáceo llena de energía cualquier espacio.</p> <p>El recipiente de vidrio de gran peso incorpora detalles plateados que le confieren un aire de lujo. Su fórmula Deluxe ofrece una mayor proyección de la fragancia que las velas convencionales, lo que la hace ideal para estancias amplias.</p>
+
+                    <div class="accordion mt-5" id="productAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#details">
+                                    Detalles del Producto
+                                </button>
+                            </h2>
+                            <div id="details" class="accordion-collapse collapse" data-bs-parent="#productAccordion">
+                                <div class="accordion-body">
+                                    <ul>
+                                        <li>Peso neto: 300g</li>
+                                        <li>Tiempo de quema aproximado: 60 horas</li>
+                                        <li>Dimensiones: 16cm diámetro x 14cm altura</li>
+                                        <li>Mezcla de cera premium 100% natural</li>
+                                        <li>Hilo de algodón sin plomo</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#care">
+                                    Instrucciones de Cuidado
+                                </button>
+                            </h2>
+                            <div id="care" class="accordion-collapse collapse" data-bs-parent="#productAccordion">
+                                <div class="accordion-body">
+                                    <p>Para obtener los mejores resultados:</p>
+                                    <ul>
+                                        <li>Permitir que se forme un pool completo de fusión</li>
+                                        <li>Girar ocasionalmente para un consumo uniforme</li>
+                                        <li>Mantener la tapa en su lugar cuando no se esté utilizando</li>
+                                        <li>Evitar colocar cerca de electrónica</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="mb-4 text-center">También te puede interesar</h2>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card h-100">
+                        <img src="lavendermooncandle1.jpg" class="card-img-top" alt="Lavender & Moonflower">
+                        <div class="card-body">
+                            <h5 class="card-title">Lavender & Moonflower</h5>
+                            <p class="text-muted">$ 472.000</p>
+                            <a href="Lavender.html" class="btn btn-outline-danger w-100">Ver Detalles</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card h-100">
+                        <img src="goldenamber.jpg" class="card-img-top" alt="Golden Amber & Orange">
+                        <div class="card-body">
+                            <h5 class="card-title">Golden Amber & Orange</h5>
+                            <p class="text-muted">$ 515.000</p>
+                            <a href="GoldenAmber.html" class="btn btn-outline-danger w-100">Ver Detalles</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card h-100">
+                        <img src="peonyblush1.jpg" class="card-img-top" alt="Peony & Blush Suede">
+                        <div class="card-body">
+                            <h5 class="card-title">Peony & Blush Suede</h5>
+                            <p class="text-muted">$ 468.000</p>
+                            <a href="Peony.html" class="btn btn-outline-danger w-100">Ver Detalles</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>&copy; 2023 Mundo Velas. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap & Custom JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Image Modal functionality
+ function openImageModal(imgSrc) {
+            const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+            document.getElementById('enlargedImage').src = imgSrc;
+            
+            // Update active thumbnail
+            document.querySelectorAll('.modal-thumbnail').forEach(thumb => {
+                thumb.classList.remove('active');
+                if (thumb.src.includes(imgSrc)) {
+                    thumb.classList.add('active');
+                }
+            });
+            
+            modal.show();
+        }
+        
+        function changeModalImage(thumb) {
+            document.getElementById('enlargedImage').src = thumb.src;
+            document.querySelectorAll('.modal-thumbnail').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+        }
+
+                function viewInStore() {
+        // El Corte Inglés Princesa, Madrid coordinates
+            const latitude = 40.430389;
+            const longitude = -3.715806;
+            const storeName = "El Corte Inglés Princesa";
+            const address = "Calle de la Princesa, 56, 28008 Madrid";
+
+        
+        
+        // Create Google Maps URL
+        const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}&query_place_id=ChIJ5TCOcRaYQg0R0Jh4V_Du-1k`;
+    
+        
+        // Open in new tab
+        window.open(googleMapsUrl, '_blank');
+        
+        // Optional: Show confirmation message
+        showStoreNotification(storeName, address);
+    }
+
+    // Favorite functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeFavorites();
+    });
+
+    function initializeFavorites() {
+        const favoriteBtn = document.getElementById('favoriteBtn');
+        
+        // Check favorite status on page load
+        checkFavoriteStatus();
+        
+        // Add click event to favorite button
+        if (favoriteBtn) {
+            favoriteBtn.addEventListener('click', handleFavoriteClick);
+        }
+    }
+
+    async function checkFavoriteStatus() {
+        const token = localStorage.getItem('token');
+        const favoriteBtn = document.getElementById('favoriteBtn');
+        
+        if (!token || !favoriteBtn) return;
+
+        try {
+            const response = await fetch('http://localhost:3000/api/users/favorites', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const favorites = data.favorites;
+                const heartIcon = favoriteBtn.querySelector('i');
+                const currentProductId = getCurrentProductId();
+                
+                // Check if current product is in favorites
+                const isFavorite = favorites.some(fav => fav._id === currentProductId);
+                
+                if (isFavorite) {
+                    heartIcon.classList.replace('far', 'fas');
+                    favoriteBtn.classList.add('active');
+                    favoriteBtn.innerHTML = '<i class="fas fa-heart me-2"></i>Remover de Favoritos';
+                }
+            }
+        } catch (error) {
+            console.error('Error checking favorites:', error);
+        }
+    }
+
+    async function handleFavoriteClick() {
+        const token = localStorage.getItem('token');
+        
+        if (!token) {
+            alert('Please sign in to add favorites');
+            window.location.href = "../BSLOGIN/index.html";
+            return;
+        }
+
+        const favoriteBtn = this;
+        const heartIcon = favoriteBtn.querySelector('i');
+        const productId = getCurrentProductId();
+        const isCurrentlyFavorite = heartIcon.classList.contains('fas');
+
+        try {
+            let response;
+            let url;
+            
+            if (isCurrentlyFavorite) {
+                // Remove from favorites
+                url = `http://localhost:3000/api/users/favorites/${productId}`;
+                response = await fetch(url, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+            } else {
+                // Add to favorites
+                url = 'http://localhost:3000/api/users/favorites';
+                response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ productId: productId })
+                });
+            }
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                // Toggle UI state
+                if (isCurrentlyFavorite) {
+                    heartIcon.classList.replace('fas', 'far');
+                    favoriteBtn.classList.remove('active');
+                    favoriteBtn.innerHTML = '<i class="far fa-heart me-2"></i>Agregar a Favoritos';
+                    showNotification('Removed from favorites!', 'success');
+                } else {
+                    heartIcon.classList.replace('far', 'fas');
+                    favoriteBtn.classList.add('active');
+                    favoriteBtn.innerHTML = '<i class="fas fa-heart me-2"></i>Remover de Favoritos';
+                    showNotification('Added to favorites!', 'success');
+                }
+            } else {
+                throw new Error(result.message || 'Failed to update favorite');
+            }
+        } catch (error) {
+            console.error('Error updating favorite:', error);
+            showNotification(error.message || 'Failed to update favorites. Please try again.', 'error');
+        }
+    }
+
+    function getCurrentProductId() {
+        // Map each product page to its product ID
+        const pageName = window.location.pathname.split('/').pop();
+        
+        const productMap = {
+            'Colonia.html': 'colonia-product-id',
+            'FicodiAmalfi.html': 'ficodiamalfi-product-id', 
+            'MirtodiPanamera.html': 'mirtodipanamera-product-id',
+            'Grazie.html': 'grazie-product-id',
+            'Lavender.html': 'lavender-product-id',
+            'LimeBasil.html': 'limebasil-product-id',
+            'Peony.html': 'peony-product-id',
+            'GoldenAmber.html': 'goldenamber-product-id'
+        };
+        
+        return productMap[pageName] || 'limebasil-product-id';
+    }
+
+    function showNotification(message, type) {
+        // Simple alert for now
+        alert(message);
+    }
+ async function addToCart() {
+        const token = localStorage.getItem('token');
+        
+        if (!token) {
+            alert('Debes iniciar sesión para añadir productos al carrito.');
+            window.location.href = "../BSLOGIN/index.html";
+            return;
+        }
+
+        const productId = getCurrentProductId();
+        
+        // Obtenemos datos del producto desde el HTML
+        const productName = document.querySelector('h1').innerText;
+        const productImage = document.querySelector('.product-image').src.split('/').pop();
+        
+        // Obtenemos el precio (quitando el $ y los puntos)
+        const priceText = document.querySelector('.price').innerText;
+        const productPrice = parseInt(priceText.replace(/[^0-9]/g, ''));
+
+        const productData = {
+            productId: productId,
+            name: productName,
+            price: productPrice,
+            image: productImage,
+            quantity: 1
+        };
+
+        try {
+            const btn = document.getElementById('addToCartBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Añadiendo...';
+            btn.disabled = true;
+
+            const response = await fetch('http://localhost:3000/api/cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(productData)
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                if (window.updateCartCounter) {
+                    window.updateCartCounter();
+                }
+                showNotification('¡Producto añadido al carrito!', 'success');
+            } else {
+                throw new Error(result.message || 'Error al añadir');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            showNotification('Error al añadir al carrito.', 'error');
+        } finally {
+            const btn = document.getElementById('addToCartBtn');
+            if (btn) {
+                btn.innerHTML = '<i class="fas fa-shopping-cart me-2"></i>Añadir al Carrito';
+                btn.disabled = false;
+            }
+        }
+    }
+
+</script> 
+
+<script src="../js/cart-global.js"></script> 
+
+</body>
+</html>

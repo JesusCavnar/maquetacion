@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Carrito - Mundo Velas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .bg-red { background-color: #ff0000; }
+        .navbar-brand-custom { margin-left: 43%; }
+        .brand-text-black { color: black; }
+        
+        .cart-item {
+            border-bottom: 1px solid #eee;
+            padding: 20px 0;
+        }
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+        .cart-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .qty-input {
+            width: 70px;
+            text-align: center;
+        }
+        .summary-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .btn-remove {
+            color: #d32f2f;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        .btn-remove:hover { color: #a00000; }
+                /* Footer Styles */
+         footer {
+           background-color: #222;
+          color: #fff;
+          padding: 4rem 0 2rem;
+           margin-top: auto;
+          }
+
+         .footer-title {
+          margin-bottom: 1.5rem;
+         font-size: 1.5rem;
+         color: #fff;
+          }
+
+         .footer-links a {
+            color: #ccc;
+          text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+             transition: all 0.3s;
+          }
+
+.footer-links a:hover {
+    color: var(--primary-red);
+    padding-left: 5px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 1.5rem;
+}
+
+.social-icons a {
+    color: white;
+    background-color: rgba(255,255,255,0.1);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.social-icons a:hover {
+    background-color: var(--primary-red);
+    transform: translateY(-3px);
+}
+
+.copyright {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    color: #aaa;
+    font-size: 0.9rem;
+}
+    
+    </style>
+</head>
+<body>
+<!-- Navbar superior -->
+    <nav class="navbar bg-red">
+        <div class="container-fluid">
+            <a class="navbar-brand navbar-brand-custom d-flex align-items-center" href="../BSHOME/index.html">
+                <img src="ruta-del-logo.png" alt="Logo" width="34" height="40" class="d-inline-block align-text-top me-2">
+                <span class="text-center brand-text-black">Mundo Velas</span>
+            </a>
+
+          <div class="d-flex align-items-center gap-3">
+            
+               <a href="../BSCART/index.html" class="position-relative" style="text-decoration: none;">
+             <img src="ruta-de-tu-imagen-carrito.png" alt="Carrito" style="width: 32px; height: 32px; object-fit: contain;">
+
+             <span id="cart-counter" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none;">
+            0
+        </span>
+     </a>
+
+            <a class="navbar-brand profile-link" href="../BSUSERPAGE/profilemain.html">
+                <img src="ruta-del-icono-perfil.png" alt="Profile" width="30" height="30">
+            </a>
+            
+        </div>
+    </div>
+</nav>
+
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" title="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link" href="../BSHOME/index.html">Inicio</a>
+                    <a class="nav-link" href="../BSCATALOG/index.html">Velas</a>
+                    <a class="nav-link" href="../BSESSENCE/index.html">Esencias</a>
+                    <a class="nav-link" href="../BSGIFTSET/index.html">Set de Regalos</a>
+                    <a class="nav-link" href="../BSMISSION/index.html">Misión & Metas</a>
+                    <a class="nav-link" href="../BSABOUT/index.html">Sobre Nosotros</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido del Carrito -->
+    <div class="container my-5">
+        <h2 class="mb-4">Tu Carrito de Compras</h2>
+
+        <!-- Contenedor donde se inyectarán los productos -->
+        <div class="row">
+            <div class="col-lg-8">
+                <div id="cart-container" class="bg-white p-4 rounded shadow-sm">
+                    <!-- Los productos se cargarán aquí -->
+                    <div class="text-center py-5" id="loading-cart">
+                        <div class="spinner-border text-danger" role="status"></div>
+                        <p class="mt-2">Cargando tu carrito...</p>
+                    </div>
+                </div>
+            </div>
+
+<!-- Resumen de la compra -->
+            <div class="col-lg-4 mt-4 mt-lg-0">
+                <div class="summary-card sticky-top" style="top: 20px;">
+                    <h4 class="mb-4">Resumen de Compra</h4>
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal</span>
+                        <span id="summary-subtotal">$ 0</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Envío</span>
+                        <span>$ 15.000</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                    <span>IVA (19%)</span>
+                    <span id="summary-iva">$ 0</span>
+                     </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-4">
+                        <strong>Total</strong>
+                        <strong id="summary-total" class="text-danger fs-5">$ 0</strong>
+                    </div>
+
+                    <!-- Formulario de Envío (se guarda para el checkout) -->
+                    <h5 class="mt-4 mb-3">Datos de Envío</h5>
+                    <form id="shipping-form">
+                        <div class="mb-2">
+                            <input type="text" class="form-control" id="ship-name" placeholder="Nombre completo" required>
+                        </div>
+                        <div class="mb-2">
+                            <input type="text" class="form-control" id="ship-address" placeholder="Dirección, Torre, Apto, Numero de Casa" required>
+                        </div>
+                        <div class="mb-2">
+                            <input type="text" class="form-control" id="ship-city" placeholder="Ciudad Y Departamento" required>
+                        </div>
+                        
+                        <div class="mb-2">
+                            <input type="text" class="form-control" id="ship-phone" placeholder="Teléfono" required>
+                        </div>
+                    </form>
+
+                    <button id="checkout-btn" class="btn btn-danger w-100 btn-lg mt-3" onclick="proceedToCheckout()">
+                        Proceder al Pago <i class="fas fa-arrow-right ms-2"></i>
+                    </button>
+                    <p class="text-center text-muted mt-2" style="font-size: 0.8rem;">
+                        Serás redirigido a Wompi (Modo Prueba) para completar el pago.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Lógica específica de la página del carrito -->
+    <script>
+        let cartData = null;
+        const SHIPPING_COST = 15000;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '../BSLOGIN/index2.html';
+                return;
+            }
+            loadCartPage();
+        });
+
+        async function loadCartPage() {
+            const token = localStorage.getItem('token');
+            try {
+                const response = await fetch('http://localhost:3000/api/cart', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    cartData = data.cart;
+                    renderCart(cartData);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('cart-container').innerHTML = '<p class="text-danger">Error al cargar el carrito.</p>';
+            }
+        }
+
+        function renderCart(cart) {
+            const container = document.getElementById('cart-container');
+            const subtotalEl = document.getElementById('summary-subtotal');
+            const totalEl = document.getElementById('summary-total');
+            const ivaEl = document.getElementById('summary-iva');
+
+            if (!cart.items || cart.items.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-5">
+                        <i class="fas fa-shopping-bag text-muted mb-3" style="font-size: 3rem;"></i>
+                        <h4>Tu carrito está vacío</h4>
+                        <a href="../BSCATALOG/index.html" class="btn btn-outline-danger mt-3">Explorar Productos</a>
+                    </div>`;
+                subtotalEl.innerText = '$ 0';
+                ivaEl.innerText = '$ 0';
+                totalEl.innerText = '$ 0';
+                return;
+            }
+
+            let html = '';
+            cart.items.forEach(item => {
+                html += `
+                    <div class="cart-item row align-items-center">
+                        <div class="col-3 col-md-2">
+                            <img src="../${item.category || 'BSCATALOG'}/${item.image}" class="cart-img" alt="${item.name}">
+                        </div>
+                        <div class="col-9 col-md-4">
+                            <h5 class="mb-1">${item.name}</h5>
+                            <p class="text-muted mb-0">$ ${item.price.toLocaleString('es-CO')}</p>
+                        </div>
+                        <div class="col-6 col-md-3 mt-3 mt-md-0">
+                            <input type="number" class="form-control qty-input" value="${item.quantity}" min="1" 
+                                   onchange="updateQuantity('${item.productId}', this.value)">
+                        </div>
+                        <div class="col-6 col-md-3 text-end mt-3 mt-md-0">
+                            <h5 class="text-danger mb-0">$ ${(item.price * item.quantity).toLocaleString('es-CO')}</h5>
+                            <button class="btn-remove mt-2" onclick="removeItem('${item.productId}')" title="Eliminar">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+
+
+            const subtotal = cart.subtotal || 0;
+            const iva = subtotal * 0.19;
+            const total = subtotal + iva + SHIPPING_COST;
+
+            subtotalEl.innerText = `$ ${subtotal.toLocaleString('es-CO')}`;
+            ivaEl.innerText = `$ ${iva.toLocaleString('es-CO')}`;
+            totalEl.innerText = `$ ${total.toLocaleString('es-CO')}`;
+        }
+
+        async function updateQuantity(productId, newQty) {
+            const token = localStorage.getItem('token');
+            const qty = parseInt(newQty);
+            if (qty < 1) return;
+
+            try {
+                await fetch(`http://localhost:3000/api/cart/${productId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ quantity: qty })
+                });
+                loadCartPage();
+                if (window.updateCartCounter) window.updateCartCounter();
+            } catch (error) {
+                console.error('Error al actualizar cantidad:', error);
+            }
+        }
+
+        async function removeItem(productId) {
+            if (!confirm('¿Estás seguro de eliminar este producto?')) return;
+            const token = localStorage.getItem('token');
+            try {
+                await fetch(`http://localhost:3000/api/cart/${productId}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                loadCartPage();
+                if (window.updateCartCounter) window.updateCartCounter();
+            } catch (error) {
+                console.error('Error al eliminar:', error);
+            }
+        }
+
+        async function proceedToCheckout() {
+            const token = localStorage.getItem('token');
+            const form = document.getElementById('shipping-form');
+            
+            // Validar que los campos de envío estén llenos
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            // Calcular el total final (Subtotal + IVA + Envío)
+            const subtotal = cartData.subtotal || 0;
+            const iva = subtotal * 0.19;
+            const total = subtotal + iva + SHIPPING_COST; // SHIPPING_COST está definido arriba
+
+            // Preparar los datos que el backend necesita para crear el pago
+            const orderData = {
+                total: total,
+                items: cartData.items,
+                shipping: {
+                    fullName: document.getElementById('ship-name').value,
+                    address: document.getElementById('ship-address').value,
+                    city: document.getElementById('ship-city').value,
+                    phone: document.getElementById('ship-phone').value
+                }
+            };
+            // Guardar datos temporalmente para recuperarlos cuando Wompi nos devuelva
+              localStorage.setItem('pendingOrder', JSON.stringify(orderData));
+            try {
+                const btn = document.getElementById('checkout-btn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Redirigiendo a Wompi...';
+                btn.disabled = true;
+
+                // Llamar a tu backend de Node.js para obtener la URL de Wompi
+                const response = await fetch('http://localhost:3000/api/checkout/create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ orderData })
+                });
+
+                const result = await response.json();
+
+                if (response.ok && result.success) {
+                    // Si el backend responde con la URL, redirigimos al usuario a Wompi
+                    window.location.href = result.checkoutUrl;
+                } else {
+                    throw new Error(result.message || 'Error al iniciar el pago');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('No se pudo iniciar el pago. Intenta de nuevo.');
+                const btn = document.getElementById('checkout-btn');
+                btn.innerHTML = 'Proceder al Pago <i class="fas fa-arrow-right ms-2"></i>';
+                btn.disabled = false;
+            }
+        }
+    </script>
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <h4 class="footer-title">Mundo Velas</h4>
+                <p>Crean momentos de calor y tranquilidad a través de nuestras velas artesanales desde 2010.</p>
+                <div class="social-icons">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="Pinterest"><i class="fab fa-pinterest"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="col-md-2 mb-4">
+                <h5 class="footer-title">Comprar</h5>
+                <div class="footer-links">
+                    <a href="../BSCATALOG/index.html">Velas</a>
+                    <a href="../BSCATALOG/index.html">Nuevos lanzamientos</a>
+                    <a href="../BSCATALOG/index.html">Mejores Vendidos</a>
+                    <a href="../BSGIFTSET/index.html">Sets de Regalo</a>
+                    <a href="../BSCATALOG/index.html">Ofertas</a>
+                </div>
+            </div>
+            <div class="col-md-2 mb-4">
+                <h5 class="footer-title">Ayuda</h5>
+                <div class="footer-links">
+                    <a href="#">Envios y Devoluciones</a>
+                    <a href="#">Cuidado de las Velas</a>
+                    <a href="#">Preguntas Frecuentes</a>
+                    <a href="../BSABOUT/index.html">Contactanos</a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <h5 class="footer-title">Informacion de Contacto</h5>
+                <p><i class="fas fa-map-marker-alt me-2"></i> Calle Velas 123, Bucaramanga, Colombia</p>
+                <p><i class="fas fa-phone me-2"></i> +57 310 123 4567</p>
+                <p><i class="fas fa-envelope me-2"></i> info@mundovelas.com</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024 Mundo Velas. All rights reserved.</p>
+        </div>
+    </div>
+    <script src="../js/cart-global.js"></script>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
