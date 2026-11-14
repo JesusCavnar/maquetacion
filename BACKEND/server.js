@@ -22,10 +22,10 @@ app.use(express.urlencoded({ extended: true })); // Middleware para parsear URL-
 // Enhanced CORS configuration
 const allowedOrigins = [
   'http://localhost:5500',
-  'http://127.0.0.1:5500',
-  'http://localhost:3000',
+  'https://mundo-velas-api.onrender.com',
+  'https://mundo-velas-api.onrender.com',
   'http://127.0.0.1:3000',
-  'https://mundo-velas.netlify.app'
+  'https://shimmering-capybara-fb7ab0.netlify.app'
 ];
 
 const corsOptions = {

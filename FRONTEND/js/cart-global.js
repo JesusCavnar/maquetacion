@@ -8,7 +8,7 @@ async function updateCartCounter() {
     if (!token || !counterElement) return; // Si no hay sesión, no hace nada
 
     try {
-        const response = await fetch('http://localhost:3000/api/cart', {
+        const response = await fetch('https://mundo-velas-api.onrender.com/api/cart', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

@@ -1,5 +1,5 @@
 
-const BASE_URL = "http://localhost:3000"; 
+const BASE_URL = "https://mundo-velas-api.onrender.com"; 
 
 const API = {
     register: async (userData) => {

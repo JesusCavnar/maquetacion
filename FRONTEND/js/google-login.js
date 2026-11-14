@@ -11,7 +11,7 @@ googleSignInButton.addEventListener('click', async () => {
         const idToken = await result.user.getIdToken(); // Get Firebase ID token
 
         // Send the ID token to backend
-        const response = await fetch('http://localhost:3000/api/users/google-signin', {
+        const response = await fetch('https://mundo-velas-api.onrender.com/api/users/google-signin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

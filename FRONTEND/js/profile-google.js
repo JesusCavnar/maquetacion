@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         try {
-            const response = await fetch('http://localhost:3000/api/users/update', {
+            const response = await fetch('https://mundo-velas-api.onrender.com/api/users/update', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const token = localStorage.getItem('token');
                 console.log("Retrieved token:", token); // Debugging log
 
-                const response = await fetch('http://localhost:3000/api/users/delete', {
+                const response = await fetch('https://mundo-velas-api.onrender.com/api/users/delete', {
                     method: 'DELETE',
                     headers: {
                         'Authorization': `Bearer ${token}`

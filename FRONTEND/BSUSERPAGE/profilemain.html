@@ -494,7 +494,7 @@ function loadManualUserData() {
         console.log('Sending update request:', updatedData);
         console.log('Current localStorage user before update:', localStorage.getItem('user'));
         
-        fetch('http://localhost:3000/api/users/update', {
+        fetch('https://mundo-velas-api.onrender.com/api/users/update', {
             method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -540,7 +540,7 @@ function handleDeleteAccount() {
         const token = localStorage.getItem('token');
         const loginMethod = localStorage.getItem('loginMethod');
         
-        fetch('http://localhost:3000/api/users/delete', {
+        fetch('https://mundo-velas-api.onrender.com/api/users/delete', {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -607,7 +607,7 @@ function handleSaveProfileChanges() {
         
         console.log('Sending update request to /api/users/update:', updatedData);
         
-        fetch('http://localhost:3000/api/users/update', {
+        fetch('https://mundo-velas-api.onrender.com/api/users/update', {
             method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${token}`,

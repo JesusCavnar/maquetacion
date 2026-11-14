@@ -13,7 +13,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
     try {
         // First check if backend is available
- const response = await fetch('http://localhost:3000/api/users/login', {
+ const response = await fetch('https://mundo-velas-api.onrender.com/api/users/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

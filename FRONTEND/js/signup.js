@@ -10,7 +10,7 @@ document.getElementById("signupForm").addEventListener("submit", async (event) =
     };
 
     try {
-        const response = await fetch('http://localhost:3000/api/users/signup', {
+        const response = await fetch('https://mundo-velas-api.onrender.com/api/users/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -71,7 +71,7 @@ async function loadFavorites(userId, isGoogleUser) {
         } else {
             // For manual users - use your API
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:3000/api/user/favorites', {
+            const response = await fetch('https://mundo-velas-api.onrender.com/api/user/favorites', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -127,7 +127,7 @@ window.removeFavorite = async function(favoriteId, isGoogleUser) {
         } else {
             // Remove via API for manual users
             const token = localStorage.getItem('token');
-            await fetch(`http://localhost:3000/api/user/favorites/${favoriteId}`, {
+            await fetch(`https://mundo-velas-api.onrender.com/api/user/favorites/${favoriteId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`

@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         try {
             console.log("Fetching user profile...");
-            const response = await fetch('http://localhost:3000/api/users/me', {
+            const response = await fetch('https://mundo-velas-api.onrender.com/api/users/me', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         };
 
         try {
-            const response = await fetch('http://localhost:3000/api/users/update', {
+            const response = await fetch('https://mundo-velas-api.onrender.com/api/users/update', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("deleteProfileButton").addEventListener("click", async () => {
         if (confirm("Are you sure you want to delete your profile? This action cannot be undone.")) {
             try {
-                const response = await fetch('http://localhost:3000/api/users/delete', {
+                const response = await fetch('https://mundo-velas-api.onrender.com/api/users/delete', {
                     method: 'DELETE',
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem("token")}`

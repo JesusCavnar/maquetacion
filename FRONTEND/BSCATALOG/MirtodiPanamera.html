@@ -402,7 +402,7 @@
         if (!token || !favoriteBtn) return;
 
         try {
-            const response = await fetch('http://localhost:3000/api/users/favorites', {
+            const response = await fetch('https://mundo-velas-api.onrender.com/api/users/favorites', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -448,7 +448,7 @@
             
             if (isCurrentlyFavorite) {
                 // Remove from favorites
-                url = `http://localhost:3000/api/users/favorites/${productId}`;
+                url = `https://mundo-velas-api.onrender.com/api/users/favorites/${productId}`;
                 response = await fetch(url, {
                     method: 'DELETE',
                     headers: {
@@ -457,7 +457,7 @@
                 });
             } else {
                 // Add to favorites
-                url = 'http://localhost:3000/api/users/favorites';
+                url = 'https://mundo-velas-api.onrender.com/api/users/favorites';
                 response = await fetch(url, {
                     method: 'POST',
                     headers: {
@@ -547,7 +547,7 @@
             btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Añadiendo...';
             btn.disabled = true;
 
-            const response = await fetch('http://localhost:3000/api/cart', {
+            const response = await fetch('https://mundo-velas-api.onrender.com/api/cart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
