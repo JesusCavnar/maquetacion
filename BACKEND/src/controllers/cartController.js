@@ -1,5 +1,5 @@
 // BACKEND/src/controllers/cartController.js
-const Cart = require('../models/cart.js');
+const Cart = require('../models/Cart.js');
 
 // 1. Obtener el carrito del usuario
 exports.getCart = async (req, res) => {
