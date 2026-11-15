@@ -213,7 +213,7 @@
                     order.items.forEach(item => {
                         itemsHtml += `
                             <div class="d-flex align-items-center mb-3">
-                                <img src="../BSCATALOG/${item.image}" class="order-img me-3" alt="${item.name}">
+                                <img src="../${item.category || 'BSCATALOG'}/${item.image}" class="order-img me-3" alt="${item.name}">
                                 <div class="flex-grow-1">
                                     <h6 class="mb-0">${item.name}</h6>
                                     <small class="text-muted">Cantidad: ${item.quantity}</small>
