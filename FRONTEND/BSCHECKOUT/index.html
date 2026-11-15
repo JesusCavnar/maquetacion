@@ -66,7 +66,8 @@
         }
 
         // Verificamos si Wompi dice que fue rechazado o si no hay estado (asumimos aprobado)
-        const isRejected = (status === 'DECLINED' || status === 'ERROR');
+        const esAprobada = getQueryParam('esAprobada');
+        const isRejected = (esAprobada === 'false');
 
         if (isRejected) {
             // DISEÑO PARA PAGO RECHAZADO
