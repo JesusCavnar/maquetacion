@@ -103,3 +103,37 @@ const orders = await Order.find({ userId: req.user.userId }).sort({ createdAt: -
         res.status(500).json({ success: false, message: 'Error al obtener órdenes' });
     }
 };
+// Verificar el estado real de una transacción en Wompi
+exports.verifyWompiTransaction = async (req, res) => {
+    try {
+        const { transactionId } = req.params;
+        const privateKey = process.env.WOMPI_PRIVATE_KEY;
+
+        if (!privateKey) {
+            return res.status(500).json({ success: false, message: 'Llave privada de Wompi no configurada' });
+        }
+
+        // Consultamos la transacción a la API de Wompi (Sandbox)
+        const response = await fetch(`https://sandbox.wompi.co/v1/transactions/${transactionId}`, {
+            headers: {
+                'Authorization': `Bearer ${privateKey}`
+            }
+        });
+
+        const data = await response.json();
+
+        if (data && data.data) {
+            // Wompi devuelve el estado en data.data.status (APPROVED, DECLINED, ERROR, etc)
+            res.status(200).json({ 
+                success: true, 
+                status: data.data.status,
+                isApproved: data.data.status === 'APPROVED'
+            });
+        } else {
+            res.status(404).json({ success: false, message: 'Transacción no encontrada' });
+        }
+    } catch (error) {
+        console.error('Error al verificar transacción:', error);
+        res.status(500).json({ success: false, message: 'Error al verificar' });
+    }
+};

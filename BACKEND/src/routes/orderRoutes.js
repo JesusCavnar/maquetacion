@@ -5,5 +5,5 @@ const authenticateToken = require('../../middlewares/authMiddleware');
 
 router.post('/', authenticateToken, orderController.createOrder);
 router.get('/', authenticateToken, orderController.getUserOrders);
-
+router.get('/verify/:transactionId', orderController.verifyWompiTransaction);
 module.exports = router;
